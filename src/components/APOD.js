@@ -7,9 +7,9 @@ export default function Astro(props){
 
     useEffect(() => {
         axios
-        .get("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=DEMO_KEY")
+        .get("https://api.nasa.gov/planetary/apod?api_key=Mgaf2TNAl9usyH3Ivagn5GTRvxnTzYjpfbLLxtSj")
         .then(response => {
-            const pics = response.data.photos;
+            const pics = response.data;
             console.log(pics)
             setPics(pics);
         })
@@ -19,16 +19,13 @@ export default function Astro(props){
     },[]);
     return (
         <div className= "getData">
-            {pics.map(pic => {
-                console.log(pics)
-               
-                return (
-                <PicsCard 
-                 key = {pic.id}
-                 earthDate = {pic.earth_date}
-                 img = {pic.img_src} />
-                )
-            })}
+          <PicsCard 
+           title = {pics.title}
+           date = {pics.date}
+           img = {pics.url}
+           explanation = {pics.explanation} 
+            />
+            
         </div>
    
     )
